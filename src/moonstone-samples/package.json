@@ -3,7 +3,8 @@
 	"libPath": "../../lib",
 	"title": "Moonstone Samples",
 	"styles": [
-		"lib/*.css"
+		"lib/*.css",
+		"lib/*.less"
 	],
 	"assets": [
 		"assets/**/*.*"
