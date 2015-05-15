@@ -126,7 +126,7 @@ module.exports = kind({
 						]}
 					]}
 				]},
-				{kind: ToggleButton, toggleOffLabel: 'Dark Theme', toggleOnLabel: 'Light Theme', small: true, ontap: 'handleThemeTap'}
+				{kind: ToggleButton, toggleOffLabel: 'Dark Theme', toggleOnLabel: 'Light Theme', small: true, spotlight: false, ontap: 'handleThemeTap'}
 			]}
 		]},
 		{name: 'home'},
