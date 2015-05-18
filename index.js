@@ -43,7 +43,7 @@ var
 
 History.set('enableBackHistoryAPI', false);
 
-ready(function(){
+ready(function () {
 	var names = window.document.location.search.substring(1).split('&');
 	var name = names[0];
 	var sample = samples[name] || List;
