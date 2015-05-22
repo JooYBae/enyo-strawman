@@ -1,17 +1,21 @@
 var
 	kind = require('enyo/kind'),
-	Img = require('enyo/Image'),
+	Img = require('enyo/Image');
+
+var
+	FittableRows = require('layout/FittableRows');
+
+var
+	Button = require('moonstone/Button'),
 	Divider = require('moonstone/Divider'),
+	ClampedText = require('moonstone/ClampedText'),
+	GridListImageItem = require('moonstone/GridListImageItem'),
 	Icon = require('moonstone/Icon'),
 	IconButton = require('moonstone/IconButton'),
-	Marquee = require('moonstone/Marquee'),
-	GridListImageItem = require('moonstone/GridListImageItem'),
-	Scroller = require('moonstone/Scroller'),
-	Button = require('moonstone/Button'),
 	Input = require('moonstone/Input'),
 	InputDecorator = require('moonstone/InputDecorator'),
 	Overlay = require('moonstone/Overlay'),
-	FittableRows = require('layout/FittableRows');
+	Scroller = require('moonstone/Scroller');
 
 function img (w, h, text, color) {
 	text = text || 'Image';
@@ -88,10 +92,20 @@ module.exports = kind({
 			{kind: GridListImageItem, source: 'http://lorempixel.com/300/300/technics', caption: 'Text Only', ontap: 'itemTapped',
 				mixins: [Overlay.Text], overlayShowing: 'spotlight', overlayTitle: 'Technics', overlaySubtitle: '12'
 			},
+			{kind: GridListImageItem, source: 'http://lorempixel.com/300/300/people', caption: 'Clamped Title', ontap: 'itemTapped',
+				mixins: [Overlay.Text], overlayShowing: 'spotlight', overlayComponents: [
+					// overlayComponents provided by Overlay.Text can be overridden for custom
+					// behavior like clamping the text to 3 lines. If the overlay is not always
+					// visible, clamped must be set to 'always' because the dimensions cannot be
+					// accurately calculated when the ClampedText control isn't showing.
+					{kind: ClampedText, maxLines: 3, clamped: 'always', classes: 'moon-overlay-text-title', content: 'This is probably too long to put in a text overlay but let\'s say you wanted to anyway'},
+					{classes: 'moon-overlay-text-subtitle', content: '3 lines'},
+				]
+			},
 			{kind: GridListImageItem, source: 'http://lorempixel.com/300/300/city', caption: 'Marquee Title', ontap: 'itemTapped',
 				mixins: [Overlay.Marquee], overlayShowing: 'spotlight', overlayTitle: 'Some Important Information To Share', overlaySubtitle: '15'
 			},
-			{kind: GridListImageItem, source: 'http://lorempixel.com/300/300/abstract', caption: 'Marquee Both', subCaption: 'All 3 will marquee together',	ontap: 'itemTapped',
+			{kind: GridListImageItem, source: 'http://lorempixel.com/300/300/abstract', caption: 'Marquee Both', subCaption: 'Will marquee with the overlay text', ontap: 'itemTapped',
 				mixins: [Overlay.Marquee], overlayShowing: 'spotlight', overlayTitle: 'Some Important Information To Share', overlaySubtitle: '1,000,000,000,000'
 			},
 
@@ -100,6 +114,8 @@ module.exports = kind({
 			{name: 'tapOverlay', mixins: [Overlay.Support], ontap: 'showOverlay', style: 'width: 500px; height: 300px;', components: [
 				{kind: Img, src: img(500, 300, 'Tap to Show')}
 			], overlayShowing: false, overlayComponents: [
+				// overlayComponents can contain any controls and will be laid out within an
+				// absolutely-positioned container matching the size of the mixing control
 				{kind: InputDecorator, components: [
 					{kind: Input, placeholder: 'Full Name'}
 				]},
