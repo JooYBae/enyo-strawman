@@ -13,8 +13,10 @@ var
 	});
 
 newSampler.samples = {
+	ButtonSample: require('./ButtonAnimatedSample.js')
 };
 
 strawman.samples['MoonstoneExtra'] = newSampler;
 
 module.exports = strawman;
+
