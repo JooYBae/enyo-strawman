@@ -1,5 +1,6 @@
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	utils = require('enyo/utils');
 
 var
 	FittableRows = require('layout/FittableRows');
@@ -32,16 +33,34 @@ module.exports = kind({
 		//Second row of buttons
 		{classes: 'moon-5v', components:[
 			{kind: TooltipDecorator, components: [
+				{kind: Button, small: true, content: 'Multiline Left Tooltip'},
+				{kind: Tooltip, components: [
+					{content: utils.toUpperCase('I\'m a left tooltip.')},
+					{content: utils.toUpperCase('With a second line of content')}
+				]}
+			]},
+
+			{kind: TooltipDecorator, style: 'float: right', components: [
+				{kind: Button, small: true, content: 'Multiline Right'},
+				{kind: Tooltip, position: 'above', components: [
+					{content: utils.toUpperCase('I\'m a right tooltip.')},
+					{content: utils.toUpperCase('With a second line of content')}
+				]}
+			]}
+		]},
+		//Third row of buttons
+		{classes: 'moon-5v', components:[
+			{kind: TooltipDecorator, components: [
 				{kind: Button, small: true, content: 'Item with Left Floating Tooltip'},
 				{kind: Tooltip, floating: true, content: 'I\'m a left floating tooltip.'}
 			]},
 
 			{kind: TooltipDecorator, style: 'float: right', components: [
 				{kind: Button, disabled: true, small: true, content: 'Item with Right Floating Tooltip'},
-				{name: 'toolTipFloating', floating: true, kind: Tooltip, content: 'I\'m a right floating text tooltip', position: 'above'}
+				{name: 'toolTipFloating', floating: true, kind: Tooltip, position: 'above', content: 'I\'m a right floating tooltip.'}
 			]}
 		]},
-		// third row of buttons
+		//Fourth row of buttons
 		{fit: true, components:[
 			{kind: TooltipDecorator, components: [
 				{kind: InputDecorator, components: [
